@@ -40,6 +40,9 @@ Owen, A. B. (1997). Monte Carlo variance of scrambled net quadrature. *SIAM Jour
 struct FaureSample end
 
 function sample(n::Integer, lb, ub, ::FaureSample)
+    if n == 0
+        throw(ZeroSamplesError())
+    end
     length(lb) == length(ub) || DimensionMismatch("Lower and upper bounds do not match.")
     dimension = length(lb)
     faure = sample(n, dimension, FaureSample())
